@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{#{% load static %}#}
+{% block title %} List of bills {% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Bills</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <a href="{% url 'create-bill' %}">
+                    <button type="button" class="btn btn-primary">Add new bill</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+
+            {% for bill in bills %}
+
+                <a href="{% url 'details-bill' bill.id %}" class="">
+                    <div class="col-md-4 p-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="card-title">Bill {{ bill.id }}</h5>
+                                    <span>
+                                    <a href="{% url 'create-product-bill' %}" class="btn btn-primary">
+                                        <img src="{% static 'add.svg' %}" alt="Add product">
+                                    </a>
+                                    <a href="{% url 'update-bill' bill.id %}" class="btn btn-primary">
+                                        <img src="{% static 'edit.svg' %}" alt="Update">
+                                    </a>
+                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                             data-bs-target="#bill_{{ bill.id }}">
+                                             <img src="{% static 'delete.svg' %}" alt="Delete">
+                                        </button>
+                                </span>
+                                </div>
+                                <p class="card-text">Car: {{ bill.car.number_plate }}</p>
+                                <p class="card-text">Total: {{ bill.total }}</p>
+                                <p class="card-text">Products: {{ bill.products_count }}</p>
+                                {#                            {% for product_bill in bill.productbill_set.all %}#}
+                                {#                                <p class="card-text">Product: {{ product_bill.product }} </p>#}
+                                {#                                                            {% endfor %}#}
+                                {# href="{% url 'details-bill' bill.id %}"#}
+
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="bill_{{ bill.id }}" tabindex="-1"
+                                     aria-labelledby="exampleModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete
+                                                    - {{ bill }}</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to delete {{ bill }}?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    No
+                                                </button>
+                                                <a href="{% url 'delete-bill' bill.id %}"
+                                                   class="btn btn-outline-danger">Yes</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

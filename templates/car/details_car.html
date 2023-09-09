@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} Details - {{ car }} {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <br><br>
+                <div class="card text-center">
+                    <div class="card-header">
+                        View details
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ car }}</h5>
+                        <p class="card-text"><strong>Brand:</strong> {{ car.brand }}</p>
+                        <p class="card-text"><strong>Model:</strong> {{ car.model }}</p>
+                        <p class="card-text"><strong>VIN number:</strong> {{ car.vin_number }}</p>
+                        <p class="card-text"><strong>Number plate:</strong> {{ car.number_plate }}</p>
+                        <p class="card-text"><strong>Engine displacement:</strong> {{ car.engine_displacement }}</p>
+                        <p class="card-text"><strong>Colour:</strong> {{ car.colour }}</p>
+                        <a href="{% url 'list-of-cars' %}" class="btn btn-primary">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{#{% load static %}#}
+{% block title %} List of clients {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+
+            {% for client in all_clients %}
+
+                <div class="col-md-3 p-4">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Client name: {{ client.name }}</h5>
+                            {#                    <h6 class="card-subtitle mb-2 text-body-secondary">{{ car.brand }} {{ car.model }}</h6>#}
+                            <p class="card-text">Phone number: {{ client.phone_number }}</p>
+                            <p class="card-text">Email address: {{ client.email }}</p>
+                            <a href="{% url 'create-bill' %}" class="card-link">Create bill</a>
+                            <a href="{% url 'create-car' %}" class="card-link">Create receipt</a>
+                            <br><br>
+
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    More actions
+                                </button>
+                                <ul class="dropdown-menu">
+
+                                    <li><a class="dropdown-item"
+                                           href="{% url 'update-client' client.id %}">Update</a>
+                                    </li>
+                                    <li><a class="dropdown-item"
+                                           href="{% url 'details-client' client.id %}">Details</a>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                                                data-bs-target="#client_{{ client.id }}">
+                                            Delete
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="client_{{ client.id }}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete
+                                                - {{ client }}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete {{ client }}?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                No
+                                            </button>
+                                            <a href="{% url 'delete-client' client.id %}"
+                                               class="btn btn-outline-danger">Yes</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

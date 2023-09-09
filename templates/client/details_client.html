@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} Details - {{ client }} {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <br><br>
+                <div class="card text-center">
+                    <div class="card-header">
+                        View details
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ client }}</h5>
+                        <p class="card-text"><strong>Phone number:</strong> {{ client.phone_number }}</p>
+                        <p class="card-text"><strong>Email:</strong> {{ client.email }}</p>
+                        <a href="{% url 'list-of-clients' %}" class="btn btn-primary">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

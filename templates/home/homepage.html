@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+
+
+
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="card m-3">
+                            <h5 class="card-header">Bills</h5>
+                            <div class="card-body">
+{#                                <h5 class="card-title">Total Number of Bills: {{ bills }}</h5>#}
+                                <a href="{% url 'list-of-bills' %}" class="btn btn-primary btn-lg">View bills</a>
+                            </div>
+                        </div>
+
+                        <div class="card m-3">
+                            <h5 class="card-header">Product bills</h5>
+                            <div class="card-body">
+                                <a href="{% url 'list-of-product-bills' %}" class="btn btn-primary btn-lg">View product bills</a>
+                            </div>
+                        </div>
+
+                        <div class="card m-3">
+                            <h5 class="card-header">Products</h5>
+                            <div class="card-body">
+                                <a href="{% url 'list-of-products' %}" class="btn btn-primary btn-lg">View products</a>
+                            </div>
+                        </div>
+
+                        <div class="card m-3">
+                            <h5 class="card-header">Clients</h5>
+                            <div class="card-body">
+{#                                <h5 class="card-title">Total Number of Clients: {{ clients }}</h5>#}
+                                <a href="{% url 'list-of-clients' %}" class="btn btn-primary btn-lg">View clients</a>
+                            </div>
+                        </div>
+
+                        <div class="card m-3">
+                            <h5 class="card-header">Cars</h5>
+                            <div class="card-body">
+{#                                <h5 class="card-title">Total Number of Cars: {{ cars }}</h5>#}
+                                <a href="{% url 'list-of-cars' %}" class="btn btn-primary btn-lg">View cars</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}

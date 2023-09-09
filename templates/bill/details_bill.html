@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} Details - {{ bill }} {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <br><br>
+                <div class="card text-center">
+                    <div class="card-header">
+                        View details
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ bill }}</h5>
+                        <p class="card-text"><strong>Car:</strong> {{ bill.car }}</p>
+                        <p class="card-text"><strong>Workmanship:</strong> {{ bill.workmanship }}</p>
+                        <p class="card-text"><strong>Notes:</strong> {{ bill.notes }}</p>
+                        <a href="{% url 'list-of-bills' %}" class="btn btn-primary">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
