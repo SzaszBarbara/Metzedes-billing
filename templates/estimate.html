@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{#{% load static %}#}
+{% block title %} Estimate {% endblock %}
+
+{% block navbar %}
+
+
+{% endblock %}
+
+{% block content %}
+    {#    <style>#}
+    {#        html {#}
+    {#            font-size: 12px;#}
+    {#        }#}
+    {#    </style>#}
+    <div class="card">
+        <div class="card-body">
+            <div class="container mb-5 mt-3">
+                <div class="d-flex col-12">
+                    <div class="col-12">
+
+
+                        <div class="text-start">
+                            <span><strong>OLDIES CARS SRL-D</strong></span>
+                        </div>
+                        <div class="text-start">
+                            <span class="fw-bold">str. Libertatii, nr. 319G, Apahida, jud. Cluj</span>
+                        </div>
+                        <div class="text-start">
+                            <span class="fw-bold">tel: 0731800535</span>
+                        </div>
+
+
+                        <div class="text-end">
+                            <span><strong>Deviz nr. </strong>{{ bill.estimate_number }}</span>
+                        </div>
+                        <div class="text-end">
+                            <i class="fas fa-circle"></i>
+                            <span class="fw-bold">Data intrarii in service:&nbsp</span>{{ bill.repairing_start_date }}
+                        </div>
+                        <div class="text-end">
+                            <i class="fas fa-circle"></i>
+                            <span class="fw-bold">Data iesirii din service: </span>{{ bill.repairing_end_date }}
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+
+
+                <div class="text-center mb-4">DEVIZ</div>
+
+                <div class="row col-12">
+                    <div class="col-8">
+                        <ul class="list-unstyled">
+                            <li class="text">Service</li>
+                            <li class="text-muted">Service auto: OLDIES CARS SRL</li>
+                            <li class="text-muted">Oras: APAHIDA</li>
+                            <li class="text-muted">Adresa: STR LIBERTATII 319A</li>
+                            <li class="text-muted">400397</li>
+                            <li class="text-muted">Adresa de email:</li>
+                            <li class="text-muted">oldiescarscluj@gmail.com</li>
+                            <li class="text-muted">Numar de Telefon: 0731800535</li>
+                            <li class="text-muted">Registrul Comertului: J12/2440/2016</li>
+                            <li class="text-muted">RO: 36245796</li>
+                        </ul>
+                    </div>
+                    <div class="col-4">
+                        <ul class="list-unstyled">
+                            <li class="text">Client</li>
+                            <li class="text-muted">Nume: {{ bill.car.client.name }}</li>
+                            <li class="text-muted">Adresa: {{ bill.car.client.address }}</li>
+                            <li class="text-muted">Numar de Telefon: {{ bill.car.client.phone_number }}</li>
+                            <li class="text-muted">Registrul Comertului: {{ bill.car.client.reg_com }}</li>
+                            <li class="text-muted">CIF: {{ bill.car.client.cif }}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="text-center mb-4">Masina</div>
+
+                <div class="col-8">
+                    <ul class="list-unstyled">
+                        <li class="text-muted">Marca: {{ bill.car.brand }}</li>
+                        <li class="text-muted">Model: {{ bill.car.model }}</li>
+                        <li class="text-muted">Numarul de inmatriculare: {{ bill.car.number_plate }}</li>
+                        <li class="text-muted">Seria de sasiu/caroserie: {{ bill.car.vin_number }}</li>
+                        <li class="text-muted">Capacitatea cilindrica: {{ bill.car.engine_displacement }}</li>
+                        <li class="text-muted">Anul de fabricatie: {{ bill.car.year_of_manufacture }}</li>
+                        <li class="text-muted">Culoarea masinii: {{ bill.car.colour }}</li>
+                        <li class="text-muted">Nivel de carburant: {{ bill.car.fuel_level }}</li>
+                    </ul>
+                </div>
+
+                <div class="text-center mb-4">Constatare</div>
+
+                <div class="col-8">
+                    <ul class="list-unstyled">
+                        <li class="text-muted">Motivul intrarii in service: {{ bill.notes }}</li>
+                        <li class="text-muted">Data intrarii in service: {{ bill.repairing_start_date }}</li>
+                        <li class="text-muted">Data iesirii din service: {{ bill.repairing_end_date }}</li>
+                    </ul>
+                </div>
+
+                <div class="text-center mb-4">Piese</div>
+
+                <div class="row my-2 mx-1 justify-content-center">
+                    <table class="table table-striped table-borderless mb-4">
+                        <thead class="text-white">
+                        <tr>
+                            <th scope="col">Poz.</th>
+                            <th scope="col">Denumirea piesa</th>
+                            <th scope="col">Cant.</th>
+                            <th scope="col">Pret unitar</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product_bill in bill.productbill_set.all %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ product_bill.product.name }}</td>
+                                <td>{{ product_bill.quantity }}</td>
+                                <td>{{ product_bill.selling_price }}</td>
+                                <td>{{ product_bill.selling_total }}</td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <div class="row my-2 mx-1 justify-content-center">
+                    <table class="table table-striped table-borderless">
+                        <thead class="text-white">
+                        <tr>
+                            <th scope="col">Nr.</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Pret (RON)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="col">1.</th>
+                            <td>Total Piese</td>
+                            <td>{{ bill.selling_total }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">2.</th>
+                            <td>Total manopera</td>
+                            <td>{{ bill.workmanship }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-12">
+                    <ul class="list-unstyled">
+                        <li class="text-muted ms-3"><span
+                                class="text-black me-4"><strong>TOTAL DEVIZ: </strong>{{ bill.total_estimate }}</span>RON
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="text-center">CERTIFICAT DE CALITATE SI GARANTIE</div>
+                <p class="ms">In conformitate cu prevederile Legii 449/2003 si Legii 296/2004, unitatea noastra
+                    garanteaza
+                    lucrarile executate si/sau piesele montate, dupa cum urmeaza:
+                <p class="ms">- 3 luni pentru manopera, de la data receptiei vehiculului, daca lucrarea efectuata nu a
+                    necesitat inlocuiri
+                    de piese sau s-a efectuat cu piesele clientului, conform pct. 5.5.5 din RNTR-9 (anexa 4 din
+                    O.M.T.C.T.2131/2005),
+                    pentru piesele furnizate de client unitatea noastra nu acorda garantie.</p>
+                <p class="ms">- 12 luni de la data receptiei vehiculului, pentru piesele aprovizionate de societatea
+                    noastra si manopera
+                    aferenta, numai daca garantia oferita de producatorii pieselor, conform certifcatelor de garantie
+                    furnizate, nu
+                    specifca alte conditii (in aceste situatii perioada de garantie este egala cu cea indicata de catre
+                    acestia) garantia
+                    este conditionata de spectarea cerintelor privind exploatarea corecta (utilizarea corespunzatoare,
+                    parcurgerea unui numar limitat de ilometri, etc)</p>
+                <p class="ms">Drepturile consumatorului detaliate in O. .21/1992 nu sunt afectate de garantia oferita de
+                    unitatea noastra.</p>
+
+
+                <div class="text-start">
+                    <span>SEMNATURA CLIENT</span>
+                </div>
+                <div class="text-end">
+                    <span>SEMNATURA SERVICE</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

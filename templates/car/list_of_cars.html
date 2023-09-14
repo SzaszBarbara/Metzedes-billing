@@ -3,21 +3,22 @@
 {% block title %} List of cars {% endblock %}
 
 {% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Cars</h1>
+        <div class="btn-toolbar mb-2 mb-md-0"></div>
+    </div>
+
     <div class="container-fluid">
         <div class="row">
-
             {% for car in cars %}
-
-
                 <div class="col-md-3 p-4">
-
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Owner: {{ car.client.name }}</h5>
                             <p class="card-text">Car brand: {{ car.brand }}</p>
                             <p class="card-text">Car model: {{ car.model }}</p>
                             <a href="{% url 'create-bill' %}" class="card-link">Create bill</a>
-                            <a href="{% url 'create-car' %}" class="card-link">Create receipt</a>
+{#                            <a href="{% url 'update-bill' %}" class="card-link">Add receipt</a>#}
 
                             <br><br>
 
@@ -75,7 +76,5 @@
             {% endfor %}
         </div>
     </div>
-    {#    {% for car in cars %}#}
-    {#        <ul>{{ car.client }} {{ car.brand }} {{ car.model }}</ul>#}
-    {#    {% endfor %}#}
+
 {% endblock %}

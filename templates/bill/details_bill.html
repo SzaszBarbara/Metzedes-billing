@@ -5,9 +5,9 @@
 {% block content %}
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 offset-md-3">
+            <div class="col-md-6">
                 <br><br>
-                <div class="card text-center">
+                <div class="card">
                     <div class="card-header">
                         View details
                     </div>
@@ -16,6 +16,12 @@
                         <p class="card-text"><strong>Car:</strong> {{ bill.car }}</p>
                         <p class="card-text"><strong>Workmanship:</strong> {{ bill.workmanship }}</p>
                         <p class="card-text"><strong>Notes:</strong> {{ bill.notes }}</p>
+                        <p class="card-text"><strong>Date emitted:</strong> {{ bill.date_emitted }}</p>
+                        <p class="card-text"><strong>Number:</strong> {{ bill.number }}</p>
+                        <p class="card-text"><strong>Series:</strong> {{ bill.series }}</p>
+                        <p class="card-text"><strong>Estimate number:</strong> {{ bill.estimate_number }}</p>
+                        <p class="card-text"><strong>Entering date:</strong> {{ bill.repairing_start_date }}</p>
+                        <p class="card-text"><strong>Leaving date:</strong> {{ bill.repairing_end_date }}</p>
                         <a href="{% url 'list-of-bills' %}" class="btn btn-primary">Back</a>
                     </div>
                 </div>

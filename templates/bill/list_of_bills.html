@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{#{% load static %}#}
 {% block title %} List of bills {% endblock %}
 
 {% block content %}
@@ -26,9 +25,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
-                                    <h5 class="card-title">Bill {{ bill.id }}</h5>
+                                    <h5 class="card-title">Bill #{{ bill.id }}</h5>
                                     <span>
-                                    <a href="{% url 'create-product-bill' %}" class="btn btn-primary">
+                                    <a href="{% url 'create-product-bill' %}?internal_bill={{ bill.id }}" class="btn btn-primary">
                                         <img src="{% static 'add.svg' %}" alt="Add product">
                                     </a>
                                     <a href="{% url 'update-bill' bill.id %}" class="btn btn-primary">
@@ -40,14 +39,17 @@
                                         </button>
                                 </span>
                                 </div>
-                                <p class="card-text">Car: {{ bill.car.number_plate }}</p>
-                                <p class="card-text">Total: {{ bill.total }}</p>
+                                <p class="card-text">Client: {{ bill.car.client
+                                        }}</p>
+                                <p class="card-text">Total: {{ bill.selling_total }}</p>
                                 <p class="card-text">Products: {{ bill.products_count }}</p>
-                                {#                            {% for product_bill in bill.productbill_set.all %}#}
-                                {#                                <p class="card-text">Product: {{ product_bill.product }} </p>#}
-                                {#                                                            {% endfor %}#}
-                                {# href="{% url 'details-bill' bill.id %}"#}
 
+{#                                <div class="form-check">#}
+{#                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">#}
+{#                                    <label class="form-check-label" for="flexCheckDefault">#}
+{#                                        Has receipt#}
+{#                                    </label>#}
+{#                                </div>#}
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="bill_{{ bill.id }}" tabindex="-1"
@@ -73,6 +75,22 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+
+{#                                <div class="col-12 mt-4 no-print">#}
+{#                                    <button class="btn btn-primary" onclick="window.print()">Print</button>#}
+{#                                </div>#}
+
+                                <div class="card-text" style="text-align: right">
+                                <a href="{% url 'estimate' bill.id %}" class="btn btn-secondary">
+                                        <img src="{% static 'estimate.svg' %}" alt="Estimate">
+                                </a>
+                                </div>
+
+                                <div class="card-text" style="text-align: right">
+                                <a href="{% url 'print-bill' bill.id %}" class="btn btn-secondary">
+                                        <img src="{% static 'send.svg' %}" alt="Send">
+                                </a>
                                 </div>
 
 

@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{#{% load static %}#}
+{% block title %} Print bill {% endblock %}
+
+{% block navbar %}
+
+{% endblock %}
+
+{% block content %}
+    <style>
+        html {
+            font-size: 12px;
+        }
+    </style>
+    <div class="card">
+        <div class="card-body">
+            <div class="container mb-5 mt-3">
+                <div class="d-flex col-12">
+                    <div class="col-12">
+                        <div class="text-muted d-flex justify-content-end">
+                            <span><strong>FACTURA</strong></span>
+                        </div>
+                        <div class="text-muted d-flex justify-content-end">
+                            <i class="fas fa-circle"></i>
+                            <span class="fw-bold">Numar:&nbsp</span>{{ bill.series }} / {{ bill.number }}
+                        </div>
+                        <div class="text-muted d-flex justify-content-end">
+                            <i class="fas fa-circle"></i>
+                            <span class="fw-bold">Data facturare: {{ bill.date_emitted }}</span>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+
+
+                <div class="row col-12">
+                    <div class="col-8">
+                        <ul class="list-unstyled">
+                            <li class="text-muted">Furnizor: Oldies Cars SRL</li>
+                            <li class="text-muted">CIF: 36245796</li>
+                            <li class="text-muted">Nr.reg.national: J12/2440/2016</li>
+                            <li class="text-muted">Adresa: STR. LIBERTATII, NR.319 A, Apahida, Cluj,</li>
+                            <li class="text-muted">407035</li>
+                            <li class="text-muted">Telefon: 0731800535</li>
+                            <li class="text-muted">Capital social: 500</li>
+                            <li class="text-muted">Website: www.odcars.ro</li>
+                            <li class="text-muted">Cont: RO94INGB0000999906129425</li>
+                            <li class="text-muted">Banca: ING CLUJ NAPOCA</li>
+                        </ul>
+                    </div>
+                    <div class="col-4">
+                        <ul class="list-unstyled">
+                            <li class="text-muted">Client: {{ bill.car.client.name }}</li>
+                            <li class="text-muted">CIF: {{ bill.car.client.cif }}</li>
+                            <li class="text-muted">Reg.com.: {{ bill.car.client.reg_com }}</li>
+                            <li class="text-muted">Adresa: {{ bill.car.client.address }}</li>
+                            <li class="text-muted">Telefon: {{ bill.car.client.phone_number }}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row my-2 mx-1 justify-content-center">
+                    <table class="table table-striped table-borderless">
+                        <thead class="text-white">
+                        <tr>
+                            <th scope="col">Nr. crt.</th>
+                            <th scope="col">Denumirea serviciilor</th>
+                            <th scope="col">U.M.</th>
+                            <th scope="col">Cant.</th>
+                            <th scope="col">Pret unitar -RON-</th>
+                            <th scope="col">Valoare -RON-</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product_bill in bill.productbill_set.all %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ product_bill.product.name }}</td>
+                                <td>buc</td>
+                                <td>{{ product_bill.quantity }}</td>
+                                <td>{{ product_bill.selling_price }}</td>
+                                <td>{{ product_bill.selling_total }}</td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <div class="row">
+                    <div class="col-8">
+                        <p class="ms-3">Observatii Factura este valabila fara semnatura si stampila, conform art.
+                            319
+                            alin. 29 din legea 227/2015</p>
+                        <p class="text-muted ms-3">Factura este valabila fara semnatura si stampila, conform art.
+                            319
+                            alin. 29 din legea 227/2015</p>
+
+                        <div class="col-12">
+                            <ul class="list-unstyled">
+                                <li class="text-muted ms-3"><span
+                                        class="text-black me-4"><strong>TOTAL: </strong>{{ bill.selling_total }}</span>RON
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if bill.add_receipt %}
+
+
+        <div class="card">
+            <div class="card-body">
+                <div class="container mb-5 mt-3">
+
+                    <div class="d-flex col-12">
+                        <div class="col-12">
+                            <div class="text-muted d-flex justify-content-end">
+                                <span><strong>CHITANTA</strong></span>
+                            </div>
+                            <div class="text-muted d-flex justify-content-end">
+                                <i class="fas fa-circle"></i>
+                                <span class="fw-bold">Nr:&nbsp</span>{{ bill.series }} / {{ bill.number }}
+                            </div>
+                            <div class="text-muted d-flex justify-content-end">
+                                <i class="fas fa-circle"></i>
+                                <span class="fw-bold">Data: {{ bill.date_emitted }}</span>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+
+                    <div class="row col-12">
+                        <div class="col-8">
+                            <ul class="list-unstyled">
+                                <li class="text-muted">Oldies Cars SRL</li>
+                                <li class="text-muted">CIF: 36245796</li>
+                                <li class="text-muted">Reg.com: J12/2440/2016</li>
+                                <li class="text-muted">Adresa: STR. LIBERTATII, NR.319 A, Apahida, Cluj, 407035</li>
+                                <li class="text-muted">Telefon: 0731800535</li>
+                                <li class="text-muted">Website: www.odcars.ro</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                            <div class="col-8">
+                                <p class="ms">Am primit de la: {{ bill.car.client.name }}<p/>
+                                <p class="ms">CIF: {{ bill.car.client.cif }}<p/>
+                                <p class="ms">Reg.com.: {{ bill.car.client.reg_com }}<p/>
+                                <p class="ms">Adresa: {{ bill.car.client.address }}<p/>
+                                <p class="ms">Suma de: {{ bill.selling_total }} RON<p/>
+                                <p class="ms">Reprezentand: contravaloare factura: {{ bill.series }}/{{ bill.number }} / {{ bill.date_emitted }}<p/>
+                            </div>
+                    </div>
+                    <div class="d-flex col-12">
+                        <div class="col-8">
+                            <div class="text d-flex justify-content-end">
+                                <span>Semnatura: </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    {% endif %}
+{% endblock %}

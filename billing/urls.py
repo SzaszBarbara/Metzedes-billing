@@ -11,11 +11,23 @@ urlpatterns = [
     path('delete_bill/<int:pk>/', views.BillDeleteView.as_view(), name='delete-bill'),
     path('details_bill/<int:pk>/', views.BillDetailView.as_view(), name='details-bill'),
 
+    path('print_bill/<int:pk>/', views.PrintDetailView.as_view(), name='print-bill'),
+
+    path('estimate/<int:pk>/', views.EstimateDetailsView.as_view(), name='estimate'),
+
+    path('create_receipt/', views.ReceiptCreateView.as_view(), name='create-receipt'),
+    # path('list_of_receipts/', views.ReceiptListView.as_view(), name='list-of-receipts'),
+    # path('update_receipt/<int:pk>/', views.ReceiptUpdateView.as_view(), name='update-receipt'),
+    # path('delete_receipt/<int:pk>/', views.ReceiptDeleteView.as_view(), name='delete-receipt'),
+    # path('details_receipt/<int:pk>/', views.ReceiptDetailView.as_view(), name='details-receipt'),
+
     path('create_product_bill/', views.ProductBillCreateView.as_view(), name='create-product-bill'),
     path('list_of_product_bills/', views.ProductBillListView.as_view(), name='list-of-product-bills'),
-    path('update_product_bill/<int:pk>/', views.ProductBillUpdateView.as_view(), name='update-product_bill'),
+    path('update_product_bill/<int:pk>/', views.ProductBillUpdateView.as_view(), name='update-product-bill'),
     path('delete_product_bill/<int:pk>/', views.ProductBillDeleteView.as_view(), name='delete-product-bill'),
     path('details_product_bill/<int:pk>/', views.ProductBillDetailView.as_view(), name='details-product-bill'),
+
+
 
     path('create_client/', views.ClientCreateView.as_view(), name='create-client'),
     path('list_of_clients/', views.ClientListView.as_view(), name='list-of-clients'),
@@ -35,7 +47,8 @@ urlpatterns = [
     path('list_of_cars/', views.CarListView.as_view(), name='list-of-cars'),
     path('update_car/<int:pk>/', views.CarUpdateView.as_view(), name='update-car'),
     path('delete_car/<int:pk>/', views.CarDeleteView.as_view(), name='delete-car'),
-    path('details_car/<int:pk>/', views.CarDetailView.as_view(), name='details-car')
+    path('details_car/<int:pk>/', views.CarDetailView.as_view(), name='details-car'),
+
 
 
 ]

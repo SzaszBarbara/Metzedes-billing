@@ -9,7 +9,10 @@
 </head>
 
 <body>
-{% include 'userextend/navbar.html' %}
+{% block navbar %}
+    {% include 'userextend/navbar.html' %}
+{% endblock %}
+
 {% block content %}
 
 {% endblock %}

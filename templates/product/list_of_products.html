@@ -3,44 +3,37 @@
 {% block title %} Product list {% endblock %}
 
 {% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Products</h1>
+        <div class="btn-toolbar mb-2 mb-md-0"></div>
+    </div>
 
     <div class="container-fluid">
         <div class="row">
 
             {% for product in products %}
 
-                <div class="col-md-3 p-4">
+                <div class="col-md-3 p-3">
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Product name: {{ product.name }}</h5>
+                            <div class="d-flex justify-content-between">
+                                    <h5 class="card-title">Product name: {{ product.name }}</h5>
+                                    <span>
+                                    <a href="{% url 'update-product' product.id %}" class="btn btn-primary">
+                                        <img src="{% static 'edit.svg' %}" alt="Update">
+                                    </a>
+                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                             data-bs-target="#product_{{ product.id }}">
+                                             <img src="{% static 'delete.svg' %}" alt="Delete">
+                                        </button>
+                                </span>
+                                </div>
+
                             <p class="card-text">Code: {{ product.code }}</p>
                             <p class="card-text">Intern code: {{ product.intern_code }}</p>
-
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                    More actions
-                                </button>
-                                <ul class="dropdown-menu">
-
-                                     <li><a class="dropdown-item"
-                                           href="{% url 'details-product' product.id %}">Add to bill</a>
-                                    </li>
-
-
-                                    <li><a class="dropdown-item"
-                                           href="{% url 'update-product' product.id %}">Update</a>
-                                    </li>
-
-                                    <li>
-                                        <button type="button" class="dropdown-item" data-bs-toggle="modal"
-                                                data-bs-target="#product_{{ product.id }}">
-                                            Delete
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
+                            <p class="card-text">Quantity: {{ product.quantity }}</p>
+                            <p class="card-text">Price: {{ product.purchasing_price }}</p>
 
                             <!-- Modal -->
                             <div class="modal fade" id="product_{{ product.id }}" tabindex="-1"
