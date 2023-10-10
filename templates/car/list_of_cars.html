@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{#{% load static %}#}
+{% load static %}
 {% block title %} List of cars {% endblock %}
 
 {% block content %}
@@ -14,36 +14,27 @@
                 <div class="col-md-3 p-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Owner: {{ car.client.name }}</h5>
-                            <p class="card-text">Car brand: {{ car.brand }}</p>
-                            <p class="card-text">Car model: {{ car.model }}</p>
-                            <a href="{% url 'create-bill' %}" class="card-link">Create bill</a>
-{#                            <a href="{% url 'update-bill' %}" class="card-link">Add receipt</a>#}
-
-                            <br><br>
-
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                    More actions
-                                </button>
-                                <ul class="dropdown-menu">
-
-                                    <li><a class="dropdown-item"
-                                           href="{% url 'update-car' car.id %}">Update</a>
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                           href="{% url 'details-car' car.id %}">Details</a>
-                                    </li>
-                                    <li>
-                                        <button type="button" class="dropdown-item" data-bs-toggle="modal"
+                            <div class="d-flex justify-content-between">
+                                <h5 class="card-title">Owner: {{ car.client.name }}</h5>
+                                <span>
+                                    <div class="btn-group mb-3 grid gap-2" style="text-align: right">
+                                        <a href="{% url 'update-car' car.id %}" class="btn btn-primary">
+                                            <img src="{% static 'edit.svg' %}" alt="Update">
+                                        </a>
+                                        <a href="{% url 'details-car' car.id %}" class="btn btn-secondary">
+                                            <img src="{% static 'add.svg' %}" alt="Details">
+                                        </a>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#car_{{ car.id }}">
-                                            Delete
+                                            <img src="{% static 'delete.svg' %}" alt="Delete">
                                         </button>
-                                    </li>
-                                </ul>
+                                    </div>
+                                </span>
                             </div>
 
+                            <p class="card-text">Car brand: {{ car.brand }}</p>
+                            <p class="card-text">Car model: {{ car.model }}</p>
+                            <a class="btn btn-secondary" href="{% url 'create-bill' %}" role="button">Create bill</a>
                             <!-- Modal -->
                             <div class="modal fade" id="car_{{ car.id }}" tabindex="-1"
                                  aria-labelledby="exampleModalLabel"

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{#{% load static %}#}
+{% load static %}
 {% block title %} List of clients {% endblock %}
 
 {% block content %}
@@ -10,42 +10,28 @@
 
     <div class="container-fluid">
         <div class="row">
-
             {% for client in all_clients %}
-
                 <div class="col-md-3 p-4">
-
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Client name: {{ client.name }}</h5>
-                            {#                    <h6 class="card-subtitle mb-2 text-body-secondary">{{ car.brand }} {{ car.model }}</h6>#}
+                            <div class="d-flex justify-content-between">
+                                <h5 class="card-title">Client name: {{ client.name }}</h5>
+                                <span>
+                                    <div class="btn-group mb-3 grid gap-2" style="text-align: right">
+                                        <a href="{% url 'update-client' client.id %}" class="btn btn-primary">
+                                            <img src="{% static 'edit.svg' %}" alt="Update">
+                                        </a>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#client_{{ client.id }}">
+                                            <img src="{% static 'delete.svg' %}" alt="Delete">
+                                        </button>
+                                    </div>
+                                </span>
+                            </div>
+
                             <p class="card-text">Phone number: {{ client.phone_number }}</p>
                             <p class="card-text">Email address: {{ client.email }}</p>
-                            <a href="{% url 'create-bill' %}" class="card-link">Create bill</a>
-                            <a href="{% url 'create-car' %}" class="card-link">Create receipt</a>
-                            <br><br>
-
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                    More actions
-                                </button>
-                                <ul class="dropdown-menu">
-
-                                    <li><a class="dropdown-item"
-                                           href="{% url 'update-client' client.id %}">Update</a>
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                           href="{% url 'details-client' client.id %}">Details</a>
-                                    </li>
-                                    <li>
-                                        <button type="button" class="dropdown-item" data-bs-toggle="modal"
-                                                data-bs-target="#client_{{ client.id }}">
-                                            Delete
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
+                            <a class="btn btn-secondary" href="{% url 'create-bill' %}" role="button">Create bill</a>
 
                             <!-- Modal -->
                             <div class="modal fade" id="client_{{ client.id }}" tabindex="-1"

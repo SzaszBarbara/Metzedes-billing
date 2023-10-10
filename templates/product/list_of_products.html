@@ -10,16 +10,14 @@
 
     <div class="container-fluid">
         <div class="row">
-
             {% for product in products %}
-
                 <div class="col-md-3 p-3">
-
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
-                                    <h5 class="card-title">Product name: {{ product.name }}</h5>
-                                    <span>
+                                <h5 class="card-title">Product name: {{ product.name }}</h5>
+                                <span>
+                                    <div class="btn-group mb-3 grid gap-2" style="text-align: right">
                                     <a href="{% url 'update-product' product.id %}" class="btn btn-primary">
                                         <img src="{% static 'edit.svg' %}" alt="Update">
                                     </a>
@@ -27,8 +25,9 @@
                                              data-bs-target="#product_{{ product.id }}">
                                              <img src="{% static 'delete.svg' %}" alt="Delete">
                                         </button>
+                                    </div>
                                 </span>
-                                </div>
+                            </div>
 
                             <p class="card-text">Code: {{ product.code }}</p>
                             <p class="card-text">Intern code: {{ product.intern_code }}</p>
