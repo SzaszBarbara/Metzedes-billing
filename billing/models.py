@@ -26,8 +26,7 @@ class Car(models.Model):
     fuel_level = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
-        return f'{self.client} - {self.brand} {self.model}' \
-               f''
+        return f' {self.brand} {self.model}'
 
 
 class Product(models.Model):
@@ -38,7 +37,7 @@ class Product(models.Model):
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
-        return f'{self.name} - code: {self.code}, intern code: {self.intern_code}'
+        return f'{self.name}'
 
 
 class Bill(models.Model):
@@ -84,8 +83,8 @@ class ProductBill(models.Model):
         return self.selling_price() * self.quantity
 
     def __str__(self):
-        return f'{self.quantity} {self.product}, factura: {self.internal_bill} ' \
-               f'pret: {self.product.purchasing_price} lei, adaos: {self.percent_added}%'
+        return f'{self.quantity} buc. {self.product}' \
+               # f'pret: {self.product.purchasing_price} lei'
 
 
 # chitanta

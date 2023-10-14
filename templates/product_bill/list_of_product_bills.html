@@ -16,31 +16,29 @@
 
     <div class="container-fluid">
         <div class="row">
-
             {% for productbill in productbills %}
-
-                <a href="{% url 'details-product-bill' productbill.id %}" class="">
-                    <div class="col-md-4 p-4">
-                        <div class="card">
-                            <div class="card-body">
+                <div class="col-md-3 p-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text"><strong>Product bill:</strong> {{ productbill }}</p>
+                            <a href="{% url 'details-product-bill' productbill.id %}" class="">
                                 <div class="d-flex justify-content-between">
-                                    <h5 class="card-title">Product Bill #{{ productbill.id }}</h5>
+                                    {#                                    <h5 class="card-title">Product Bill #{{ productbill.id }}</h5>#}
                                     <span>
-{#                                    <a href="{% url 'create-product-bill' %}" class="btn btn-primary">#}
-{#                                        <img src="{% static 'add.svg' %}" alt="Add product">#}
-{#                                    </a>#}
-                                    <a href="{% url 'update-product-bill' productbill.id %}" class="btn btn-primary">
-                                        <img src="{% static 'edit.svg' %}" alt="Update">
-                                    </a>
-                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                             data-bs-target="#productbill_{{ productbill.id }}">
-                                             <img src="{% static 'delete.svg' %}" alt="Delete">
-                                        </button>
-                                </span>
+                                        <div class="card-text" role="group" style="text-align: right">
+                                        <a href="{% url 'update-product-bill' productbill.id %}"
+                                           class="btn btn-primary">
+                                            <img src="{% static 'edit.svg' %}" alt="Update">
+                                        </a>
+                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                 data-bs-target="#productbill_{{ productbill.id }}">
+                                                 <img src="{% static 'delete.svg' %}" alt="Delete">
+                                         </button>
+                                        </div>
+                                    </span>
                                 </div>
-                                <p class="card-text"><strong>Products:</strong> {{ productbill }}</p>
 
-
+                                {#                                <p class="card-text">Price: {{ productbill.product.purchasing_price }}</p>#}
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="productbill_{{ productbill.id }}" tabindex="-1"
@@ -48,12 +46,12 @@
                                      aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete
-                                                    - {{ productbill }}</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                            </div>
+                                            {#                                            <div class="modal-header">#}
+                                            {#                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete#}
+                                            {#                                                    - {{ productbill }}</h1>#}
+                                            {#                                                <button type="button" class="btn-close" data-bs-dismiss="modal"#}
+                                            {#                                                        aria-label="Close"></button>#}
+                                            {#                                            </div>#}
                                             <div class="modal-body">
                                                 Are you sure you want to delete {{ productbill }}?
                                             </div>
@@ -67,12 +65,10 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-                            </div>
+                                <a/>
                         </div>
                     </div>
-                </a>
+                </div>
             {% endfor %}
         </div>
     </div>

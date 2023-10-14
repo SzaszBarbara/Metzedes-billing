@@ -78,7 +78,7 @@ class ProductBillListView(LoginRequiredMixin, ListView):
 class ProductBillUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'product_bill/update_product_bill.html'
     model = ProductBill
-    form_class = ProductBillUpdateForm
+    form_class = ProductBillForm
     success_url = reverse_lazy('list-of-product-bills')
 
 
@@ -86,6 +86,10 @@ class ProductBillDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'product_bill/delete_product_bill.html'
     model = ProductBill
     success_url = reverse_lazy('list-of-product-bills')
+
+# def delete_product_bill(request, pk):
+#     ProductBill.objects.filter(id=pk).delete()
+#     return redirect('list-of-product-bills')
 
 
 class ProductBillDetailView(LoginRequiredMixin, DetailView):
@@ -141,7 +145,7 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
 class ClientListView(LoginRequiredMixin, ListView):
     template_name = 'client/list_of_clients.html'
     model = Client
-    context_object_name = 'all_clients'
+    context_object_name = 'clients'
 
 
 # class ClientDeleteView(DeleteView):
